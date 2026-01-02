@@ -10,7 +10,7 @@ MAME updates almost monthly, and with each update, ROM filenames and contents ca
 
 Most players only frequently play a small handful of games. Services like `mdk.cab` stay current with the latest MAME-to-ROM mappings. MameProxy was born from this frustration: **"The proxy only fetches the correct ROM when you actually want to play the game."**
 
-It's designed to solve the "ROM Version Hell" faced by 95% of players. Stop managing files and start playing. XDorz
+It's designed to solve the "ROM Version Hell" faced by 95% of players. Stop managing files and start playing.
 
 ## Key Features
 
@@ -25,6 +25,7 @@ It's designed to solve the "ROM Version Hell" faced by 95% of players. Stop mana
 1.  **Windows 10/11**
 2.  **WinFsp**: You must install the WinFsp driver.
     *   Download: [WinFsp Official Website](https://winfsp.dev/)
+    *   **Note**: Make sure to select the **"Developer"** component during installation (includes necessary headers and libraries).
 3.  **Visual Studio 2022**: Required to build the project (with C++ Desktop Development workload).
 
 ## Quick Setup (Recommended)
