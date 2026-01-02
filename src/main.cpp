@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  std::wcout << L"Starting MameCloudRompath (MCR)..." << std::endl;
+  std::wcout << L"Starting MameCloudRompath (MCR) v0.1..." << std::endl;
   std::wcout << L"Mount Point: " << mountPoint << std::endl;
   std::wcout << L"Cache Dir: " << cacheDir << std::endl;
   std::wcout << L"Base URL: " << baseUrl << std::endl;

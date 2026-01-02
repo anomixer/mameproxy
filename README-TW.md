@@ -1,4 +1,4 @@
-# MameCloudRompath (MCR)
+# MameCloudRompath (MCR) v0.1
 
 [English Version](./README.md)
 
@@ -33,9 +33,9 @@ MAME 幾乎每個月都會更新，且每次更新時 ROM 的檔名與內容都�
 若要快速配置並編譯專案，請執行內建的設定腳本：
 
 1.  執行 `config.bat`。
-2.  按照提示設定您的快取目錄與磁碟機代號。
+2.  按照提示設定您的快取目錄、磁碟機代號與 MAME 路徑。**(現有設定會自動載入作為預設值)**。
 3.  該腳本會自動檢查環境、編譯專案，並建立一個 `mcr.bat` 啟動檔。
-4.  執行 `mcr.bat` 即可啟動虛擬磁碟。
+4.  執行 `mcr.bat`。它會啟動虛擬磁碟，並同時自動開啟一個新視窗幫您執行 MAME。
 
 ## 編譯步驟 (手動)
 
@@ -45,6 +45,9 @@ MAME 幾乎每個月都會更新，且每次更新時 ROM 的檔名與內容都�
 2.  VS 會自動配置 CMake。
 3.  選擇 `Release` 配置並執行「建置全部」。
 4.  編譯產物將位於 `build/Release/mcr.exe`。
+
+> [!TIP]
+> **免編譯直接使用**：若您沒有安裝 Visual Studio，`build/Release` 資料夾中已包含預先編譯好的 `mcr.exe` 與必要檔案。您可以跳過編譯步驟，直接進行 **快速設定**。
 
 ## 使用方法
 
@@ -68,11 +71,13 @@ mcr.exe -m Z: -c C:\MameCache -u https://mdk.cab/download/
 
 ## MAME 設定
 
-啟動 MCR 後，直接將 MAME 的 `rompath` 指向掛載點即可：
+啟動 MCR 後，**請勿關閉該視窗**。請另外**開啟一個新的命令提示字元 (CMD)**，並將 MAME 的 `rompath` 指向掛載點即可：
 
 ```cmd
-mame.exe -rompath Z:\ pacman
+mame.exe -rompath Z:\
 ```
+
+*(您也可以直接指定遊戲啟動：`mame.exe -rompath Z:\ pacman`)*
 
 ## 工作原理
 
@@ -98,13 +103,22 @@ MameCloudRompath 運作的流程如下，讓您了解它是如何實現「免除
 ## 注意事項
 
 *   **目錄列表**：為了效能考量，`dir Z:\` 只會顯示「已下載」的檔案。如果您知道 ROM 名稱，直接執行即可觸發下載。
-*   **中斷連線**：關閉 `mcr.exe` 視窗將會自動卸載虛擬磁碟。
+*   **維持視窗開啟**：遊玩期間 MCR 必須持續執行。關閉 `mcr.exe` 視窗將會自動卸載虛擬磁碟。
 
 ## 技術架構
 
 *   **WinFsp C++ API**: 核心檔案系統邏輯。
 *   **WinHTTP**: 處理可靠的非同步檔案傳輸。
 *   **Disk Mode Fallback**: 當 Launcher 服務不可用時，自動切換至相容性更高的磁碟模式。
+
+## 參與貢獻與免責聲明
+
+MCR 目前處於 **早期開發階段 (v0.1)**，極可能存在未發現的 Bug。本專案按「原樣」提供，不負任何擔保責任。我們非常歡迎社群的參與：
+*   **回報問題**：如果您發現任何 Bug，請提交 Issue。
+*   **想法建議**：如果您有任何新功能的提案，歡迎與我們討論！
+*   **程式碼貢獻**：如果您想改進程式碼，歡迎提交 Pull Request。
+
+讓我們一起把 MCR 打造得更好！
 
 ---
 開發者：Antigravity (Advanced Agentic Coding Team)

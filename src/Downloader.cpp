@@ -1,8 +1,6 @@
 #include "Downloader.h"
 #include <fstream>
 #include <iostream>
-#include <vector>
-
 
 #pragma comment(lib, "winhttp.lib")
 
@@ -16,7 +14,7 @@ bool Downloader::Download(const std::wstring &url,
              << std::endl;
 
   HINTERNET hSession =
-      WinHttpOpen(L"MameProxy/1.0", WINHTTP_ACCESS_TYPE_DEFAULT_PROXY,
+      WinHttpOpen(L"MameCloudRompath/1.0", WINHTTP_ACCESS_TYPE_DEFAULT_PROXY,
                   WINHTTP_NO_PROXY_NAME, WINHTTP_NO_PROXY_BYPASS, 0);
   if (!hSession) {
     std::cerr << "WinHttpOpen failed: " << GetLastError() << std::endl;

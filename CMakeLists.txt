@@ -40,5 +40,5 @@ target_link_libraries(${EXECUTABLE_NAME} "${WINFSP_PATH}/lib/winfsp-x64.lib" win
 add_custom_command(TARGET ${EXECUTABLE_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
     "${WINFSP_PATH}/bin/winfsp-x64.dll"
-    $<TARGET_FILE_DIR:MameProxy>
+    $<TARGET_FILE_DIR:${EXECUTABLE_NAME}>
 )

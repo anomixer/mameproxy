@@ -1,27 +1,8 @@
 # Build artifacts
-build/
-bin/
-obj/
-out/
-x64/
-Debug/
-Release/
-
-# Visual Studio files
-.vs/
-*.sln
-*.vcxproj
-*.vcxproj.filters
-*.vcxproj.user
-*.cmake
-CMakeCache.txt
-CMakeFiles/
-CMakeSettings.json
-*.cache
-
-# MameProxy specific
-MameCache/
-mamefs.ini
+# Build artifacts
+build/*
+!build/Release/
+mcr.ini
 mcr.bat
 proxy_log.txt
 proxy_stdout.txt

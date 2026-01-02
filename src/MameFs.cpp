@@ -142,7 +142,8 @@ int MameFs::Run(const std::wstring &mountPoint, const std::wstring &cacheDir,
 
   std::cout << "Dispatcher started. Drive should be available now."
             << std::endl;
-  std::cout << "Keeping the process alive. Check the target mount point."
+  std::cout << "Keeping the process alive. Check the target mount point. Press "
+               "Ctrl+C to stop."
             << std::endl;
 
   // Sleep indefinitely to keep the file system alive

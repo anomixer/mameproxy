@@ -1,4 +1,4 @@
-# MameCloudRompath (MCR)
+# MameCloudRompath (MCR) v0.1
 
 [繁體中文版](./README-TW.md)
 
@@ -33,9 +33,9 @@ It's designed to solve the "ROM Version Hell" faced by 95% of players. Stop mana
 To quickly configure and build the project, run the included configuration script:
 
 1.  Run `config.bat`.
-2.  Follow the prompts to set your cache directory and drive letter.
+2.  Follow the prompts to set your cache directory, drive letter, and MAME path. **(Existing settings will be automatically loaded as defaults)**.
 3.  The script will automatically build the project if needed and create a `mcr.bat` file.
-4.  Run `mcr.bat` to start the virtual drive.
+4.  Run `mcr.bat`. It will start the virtual drive AND automatically open a new window to launch MAME for you.
 
 ## Build Instructions (Manual)
 
@@ -45,6 +45,9 @@ This project uses CMake for building:
 2.  VS will automatically configure CMake.
 3.  Select the `Release` configuration and "Build All".
 4.  The executable will be generated at `build/Release/mcr.exe`.
+
+> [!TIP]
+> **Pre-built binaries**: For users without Visual Studio, the `build/Release` folder already contains a pre-built `mcr.exe` and its dependencies. You can skip the build step and go straight to **Quick Setup**.
 
 ## Usage
 
@@ -67,11 +70,13 @@ mcr.exe -m Z: -c C:\MameCache -u https://mdk.cab/download/
 
 ## MAME Configuration
 
-Once MCR is running, point MAME's `rompath` to the mount point:
+Once MCR is running, **DO NOT close the MCR window**. Open a **separate** Command Prompt and point MAME's `rompath` to the mount point:
 
 ```cmd
-mame.exe -rompath Z:\ pacman
+mame.exe -rompath Z:\
 ```
+
+*(You can also launch a game directly: `mame.exe -rompath Z:\ pacman`)*
 
 ## How it Works
 
@@ -97,13 +102,22 @@ To keep the application lightweight and efficient, MCR focus on files that chang
 ## Important Notes
 
 *   **Directory Listing**: For performance, `dir Z:\` only shows locally cached files. If you know the ROM name, running it directly will trigger the download.
-*   **Termination**: Closing the `mcr.exe` window will automatically unmount the virtual drive.
+*   **Keep Window Open**: MCR must be running while you play. Closing the `mcr.exe` window will automatically unmount the virtual drive.
 
 ## Technical Architecture
 
 *   **WinFsp C++ API**: Core file system logic.
 *   **WinHTTP**: Reliable asynchronous file transfers.
 *   **Disk Mode Fallback**: Automatically switches to highly compatible Disk Mode if the Launcher service is unavailable.
+
+## Contributing & Disclaimer
+
+MCR is currently in its **early stages (v0.1)** and likely contains bugs. It is provided "as is" without any warranty. We warmly welcome community contributions:
+*   **Bug Reports**: If you find a bug, please open an issue.
+*   **Ideas & Feedback**: Have a feature request? Let's discuss it!
+*   **Pull Requests**: Code contributions are highly appreciated.
+
+Help us make MCR the ultimate ROM management tool for everyone.
 
 ---
 Developer: Antigravity (Advanced Agentic Coding Team)
