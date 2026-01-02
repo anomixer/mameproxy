@@ -104,6 +104,15 @@ To keep the application lightweight and efficient, MCR focus on files that chang
 *   **Directory Listing**: For performance, `dir Z:\` only shows locally cached files. If you know the ROM name, running it directly will trigger the download.
 *   **Keep Window Open**: MCR must be running while you play. Closing the `mcr.exe` window will automatically unmount the virtual drive.
 
+## File Structure
+
+- `build/Release/`: Contains the pre-built `mcr.exe` and `winfsp-x64.dll`.
+- `src/`: Source code (C++).
+- `config.bat`: Interactive setup utility (generates `mcr.ini` and `mcr.bat`).
+- `build.bat`: Manual build script for developers.
+- `mcr.ini`: (Generated) Stores your cache path, drive letter, and MAME directory.
+- `mcr.bat`: (Generated) The main launcher that starts the virtual drive and MAME.
+
 ## Technical Architecture
 
 *   **WinFsp C++ API**: Core file system logic.
