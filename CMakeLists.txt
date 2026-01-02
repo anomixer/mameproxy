@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(MameProxy)
+project(MameCloudRompath)
+
+set(EXECUTABLE_NAME MameCloudRompath)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -24,13 +26,18 @@ set(SOURCES
     src/Downloader.h
 )
 
-add_executable(MameProxy ${SOURCES})
+add_executable(${EXECUTABLE_NAME} ${SOURCES})
+
+set_target_properties(${EXECUTABLE_NAME} PROPERTIES
+    CXX_STANDARD 17
+    VS_DEBUGGER_COMMAND_ARGUMENTS "-m Z: -c C:/MameCache -u https://mdk.cab/download/"
+)
 
 # Link against WinFsp and WinHTTP
-target_link_libraries(MameProxy "${WINFSP_PATH}/lib/winfsp-x64.lib" winhttp.lib user32.lib advapi32.lib) 
+target_link_libraries(${EXECUTABLE_NAME} "${WINFSP_PATH}/lib/winfsp-x64.lib" winhttp.lib user32.lib advapi32.lib)
 
 # Copy WinFsp DLL to output directory
-add_custom_command(TARGET MameProxy POST_BUILD
+add_custom_command(TARGET ${EXECUTABLE_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
     "${WINFSP_PATH}/bin/winfsp-x64.dll"
     $<TARGET_FILE_DIR:MameProxy>

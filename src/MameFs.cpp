@@ -83,8 +83,8 @@ int MameFs::Run(const std::wstring &mountPoint, const std::wstring &cacheDir,
   // requires a network prefix like \\server\share
   for (int i = 0; i < 5; ++i) {
     std::wstring uniqueSuffix = std::to_wstring(GetTickCount() + i);
-    std::wstring prefix = L"\\mameproxy" + uniqueSuffix + L"\\roms";
-    std::wstring name = L"MameProxy" + uniqueSuffix;
+    std::wstring prefix = L"\\mame-mcr" + uniqueSuffix + L"\\roms";
+    std::wstring name = L"MameCloudRompath" + uniqueSuffix;
 
     wcscpy_s(VolumeParams.Prefix, 64, prefix.c_str());
     wcscpy_s(VolumeParams.FileSystemName, 64, name.c_str());
@@ -106,7 +106,7 @@ int MameFs::Run(const std::wstring &mountPoint, const std::wstring &cacheDir,
     std::cerr << "Launcher attempts failed. Falling back to Disk Mode..."
               << std::endl;
     VolumeParams.Prefix[0] = L'\0';
-    wcscpy_s(VolumeParams.FileSystemName, 16, L"MameProxyDisk");
+    wcscpy_s(VolumeParams.FileSystemName, 32, L"MameCloudRompathDisk");
     Status = FspFileSystemCreate((PWSTR)L"\\Device\\WinFsp.Disk", &VolumeParams,
                                  Interface, &FileSystem);
   }
@@ -159,7 +159,7 @@ NTSTATUS MameFs::SGetVolumeInfo(FSP_FILE_SYSTEM *FileSystem,
   std::cout << "DEBUG: SGetVolumeInfo" << std::endl;
   VolumeInfo->TotalSize = 1024LL * 1024 * 1024 * 1024; // Fake 1TB
   VolumeInfo->FreeSize = 512LL * 1024 * 1024 * 1024;
-  wcscpy_s(VolumeInfo->VolumeLabel, 32, L"MameProxy");
+  wcscpy_s(VolumeInfo->VolumeLabel, 32, L"MameCloudRompath");
   VolumeInfo->VolumeLabelLength =
       (UINT16)(wcslen(VolumeInfo->VolumeLabel) * sizeof(WCHAR));
   return STATUS_SUCCESS;

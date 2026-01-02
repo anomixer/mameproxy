@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 echo ==========================================
-echo MameProxy Configuration Utility
+echo MameCloudRompath (MCR) Configuration Utility
 echo ==========================================
 
 :: 1. Check for WinFsp
@@ -32,9 +32,9 @@ echo BASE_URL=https://mdk.cab/download/>> mamefs.ini
 
 echo [OK] Settings saved to mamefs.ini
 
-:: 4. Check for MameProxy.exe
-if not exist "build\Release\MameProxy.exe" (
-    echo [INFO] MameProxy.exe not found. Calling build.bat...
+:: 4. Check for MameCloudRompath.exe
+if not exist "build\Release\MameCloudRompath.exe" (
+    echo [INFO] MameCloudRompath.exe not found. Calling build.bat...
     call build.bat
     if errorlevel 1 (
         echo [ERROR] Build failed. Please check the errors above.
@@ -43,22 +43,22 @@ if not exist "build\Release\MameProxy.exe" (
     )
 )
 
-:: 5. Create mame-proxy.bat
+:: 5. Create mcr.bat
 (
     echo @echo off
     echo setlocal enabledelayedexpansion
     echo for /f "tokens=1,2 delims==" %%%%a in (mamefs.ini^) do (
     echo     set %%%%a=%%%%b
     echo ^)
-    echo echo Starting MameProxy with:
+    echo echo Starting MameCloudRompath (MCR) with:
     echo echo Mount Point: %%MOUNT_POINT%%
     echo echo Cache Dir: %%CACHE_DIR%%
     echo echo URL: %%BASE_URL%%
-    echo "%%~dp0build\Release\MameProxy.exe" -m %%MOUNT_POINT%% -c "%%CACHE_DIR%%" -u %%BASE_URL%%
-) > mame-proxy.bat
+    echo "%%~dp0build\Release\MameCloudRompath.exe" -m %%MOUNT_POINT%% -c "%%CACHE_DIR%%" -u %%BASE_URL%%
+) > mcr.bat
 
 echo ==========================================
 echo [SUCCESS] Configuration complete!
-echo You can now run the proxy using: mame-proxy.bat
+echo You can now run the proxy using: mcr.bat
 echo ==========================================
 pause

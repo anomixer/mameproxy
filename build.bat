@@ -2,7 +2,7 @@
 setlocal
 
 echo ==========================================
-echo MameProxy Build Script
+echo MameCloudRompath (MCR) Build Script
 echo ==========================================
 
 :: 1. Check for WinFsp
@@ -65,7 +65,7 @@ if %errorlevel% neq 0 (
 echo.
 echo ==========================================
 echo [SUCCESS] Build completed successfully!
-echo Executable location: build\Release\MameProxy.exe
+echo Executable location: build\Release\MameCloudRompath.exe
 echo ==========================================
 echo.
 cd ..

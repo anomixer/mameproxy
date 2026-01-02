@@ -1,14 +1,14 @@
-# MameProxy
+# MameCloudRompath (MCR)
 
 [English Version](./README.md)
 
-MameProxy 是一個基於 Windows WinFsp (Windows File System Proxy) 的虛擬檔案系統，專為 MAME ROM 管理設計。它實現了「延遲下載 (Lazy Download)」機制：當 MAME 請求一個本地不存在的 ROM 時，MameProxy 會自動從指定的遠端伺服器下載該檔案，並無縫提供給 MAME 使用。
+MameCloudRompath (MCR) 是一個基於 Windows WinFsp (Windows File System Proxy) 的虛擬檔案系統，專為 MAME ROM 管理設計。它實現了「延遲下載 (Lazy Download)」機制：當 MAME 請求一個本地不存在的 ROM 時，MCR 會自動從指定的遠端伺服器下載該檔案，並無縫提供給 MAME 使用。
 
 ## 開發動機
 
 MAME 幾乎每個月都會更新，且每次更新時 ROM 的檔名與內容都可能重新編排。這導致玩家每更新一次 MAME 版本，就得對應下載幾十 GB 的 ROM 合集更新。如果你想玩某款遊戲（例如 `pacman`），卻因為新版 MAME 對應不到舊版 ROM 而無法啟動，那是很令人沮喪的。
 
-大多數玩家經常玩的其實只有那幾款遊戲，而 `mdk.cab` 幾乎即時更新了與最新 MAME 版本對應的 ROM。這就是開發 MameProxy 的初衷：**「只有當你想玩某款遊戲時，代理程式才即時去抓取對應的 ROM」**。
+大多數玩家經常玩的其實只有那幾款遊戲，而 `mdk.cab` 幾乎即時更新了與最新 MAME 版本對應的 ROM。這就是開發 MCR 的初衷：**「只有當你想玩某款遊戲時，代理程式才即時去抓取對應的 ROM」**。
 
 它設計用來解決 95% 玩家都會遇到的「ROM 版本地獄」，把時間留給遊戲，而不是研究檔案。
 
@@ -34,8 +34,8 @@ MAME 幾乎每個月都會更新，且每次更新時 ROM 的檔名與內容都�
 
 1.  執行 `config.bat`。
 2.  按照提示設定您的快取目錄與磁碟機代號。
-3.  該腳本會自動檢查環境、編譯專案，並建立一個 `mame-proxy.bat` 啟動檔。
-4.  執行 `mame-proxy.bat` 即可啟動代理程式。
+3.  該腳本會自動檢查環境、編譯專案，並建立一個 `mcr.bat` 啟動檔。
+4.  執行 `mcr.bat` 即可啟動虛擬磁碟。
 
 ## 編譯步驟 (手動)
 
@@ -44,20 +44,20 @@ MAME 幾乎每個月都會更新，且每次更新時 ROM 的檔名與內容都�
 1.  使用 Visual Studio 2022 開啟專案資料夾。
 2.  VS 會自動配置 CMake。
 3.  選擇 `Release` 配置並執行「建置全部」。
-4.  編譯產物將位於 `build/Release/MameProxy.exe`。
+4.  編譯產物將位於 `build/Release/MameCloudRompath.exe`。
 
 ## 使用方法
 
-使用命令列啟動代理程式：
+使用命令列啟動程式：
 
 ```cmd
-MameProxy.exe -m <掛載點> -c <快取路徑> -u <遠端URL>
+MameCloudRompath.exe -m <掛載點> -c <快取路徑> -u <遠端URL>
 ```
 
 ### 範例：智慧路由模式
 
 ```cmd
-MameProxy.exe -m Z: -c C:\MameCache -u https://mdk.cab/download/
+MameCloudRompath.exe -m Z: -c C:\MameCache -u https://mdk.cab/download/
 ```
 
 *   **自動偵測**：程式會依據 MAME 請求的檔案類型（.zip 或 .7z）自動在網址後方補上 `split/` 或 `standalone/`。
@@ -68,7 +68,7 @@ MameProxy.exe -m Z: -c C:\MameCache -u https://mdk.cab/download/
 
 ## MAME 設定
 
-啟動 MameProxy 後，直接將 MAME 的 `rompath` 指向掛載點即可：
+啟動 MCR 後，直接將 MAME 的 `rompath` 指向掛載點即可：
 
 ```cmd
 mame.exe -rompath Z:\ pacman
@@ -76,19 +76,19 @@ mame.exe -rompath Z:\ pacman
 
 ## 工作原理
 
-MameProxy 運作的流程如下，讓您了解它是如何實現「免除 ROM 版本煩惱」的：
+MameCloudRompath 運作的流程如下，讓您了解它是如何實現「免除 ROM 版本煩惱」的：
 
 1.  **攔截請求**：當您在 MAME 指定 `-rompath Z:\` 並啟動遊戲時，MAME 會嘗試從 `Z:` 槽讀取 ROM 檔案。
-2.  **WinFsp 介入**：Windows 核心會將讀取請求轉交給掛載 `Z:` 的 MameProxy。
-3.  **本地快取檢查**：MameProxy 首先查看您的本地快取目錄 (`-c` 參數指定的路徑)。
+2.  **WinFsp 介入**：Windows 核心會將讀取請求轉交給掛載 `Z:` 的 MCR。
+3.  **本地快取檢查**：MCR 首先查看您的本地快取目錄 (`-c` 參數指定的路徑)。
     *   **如果檔案已存在**：直接從硬碟讀取並回傳給 MAME（就像一般磁碟一樣快）。
     *   **如果檔案不存在**：進入下一步。
-4.  **即時線上下載**：MameProxy 會根據請求的檔名，自動判定類別（`.zip` 或 `.7z`），並從遠端伺服器（預設 `mdk.cab`）下載正確的對應檔案。
-5.  **無縫銜接**：下載完成後，MameProxy 會開啟檔案控制權並回傳。MAME 完全不會感覺到中間經過了網路下載，遊戲隨即啟動。
+4.  **即時線上下載**：MCR 會根據請求的檔名，自動判定類別（`.zip` 或 `.7z`），並從遠端伺服器（預設 `mdk.cab`）下載正確的對應檔案。
+5.  **無縫銜接**：下載完成後，MCR 會開啟檔案控制權並回傳。MAME 完全不會感覺到中間經過了網路下載，遊戲隨即啟動。
 
 ## 支援範圍與限制
 
-為了保持輕量化，MameProxy 專注於解決變動最頻繁的 ROM 檔案：
+為了保持輕量化，MCR 專注於解決變動最頻繁的 ROM 檔案：
 
 *   **支援下載**：位於 `rompath` 下的遊戲 ROM (`.zip`, `.7z`) 以及各式匯流排裝置、BIOS 檔案。
 *   **不支援下載**：
@@ -98,7 +98,7 @@ MameProxy 運作的流程如下，讓您了解它是如何實現「免除 ROM �
 ## 注意事項
 
 *   **目錄列表**：為了效能考量，`dir Z:\` 只會顯示「已下載」的檔案。如果您知道 ROM 名稱，直接執行即可觸發下載。
-*   **中斷連線**：關閉 `MameProxy.exe` 視窗將會自動卸載虛擬磁碟。
+*   **中斷連線**：關閉 `MameCloudRompath.exe` 視窗將會自動卸載虛擬磁碟。
 
 ## 技術架構
 
@@ -108,4 +108,4 @@ MameProxy 運作的流程如下，讓您了解它是如何實現「免除 ROM �
 
 ---
 開發者：Antigravity (Advanced Agentic Coding Team)
-專案地址：[GitHub - anomixer/mameproxy](https://github.com/anomixer/mameproxy)
+專案地址：[GitHub - anomixer/mamecloudrom](https://github.com/anomixer/mamecloudrom)
