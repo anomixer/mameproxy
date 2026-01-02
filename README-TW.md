@@ -17,14 +17,16 @@ MameProxy 是一個基於 Windows WinFsp (Windows File System Proxy) 的虛擬�
     *   下載地址：[WinFsp 官方網站](https://winfsp.dev/)
 3.  **Visual Studio 2022**: 用於編譯專案 (需包含 C++ 桌面開發組件)。
 
-## 編譯步驟
+## 快速設定 (推薦使用)
 
-本專案使用 CMake 進行建置：
+若要快速配置並編譯專案，請執行內建的設定腳本：
 
-1.  使用 Visual Studio 2022 開啟專案資料夾。
-2.  VS 會自動配置 CMake。
-3.  選擇 `Release` 配置並執行「建置全部」。
-4.  編譯產物將位於 `build/Release/MameProxy.exe`。
+1.  執行 `config.bat`。
+2.  按照提示設定您的快取目錄與磁碟機代號。
+3.  該腳本會自動檢查環境、編譯專案，並建立一個 `mame-proxy.bat` 啟動檔。
+4.  執行 `mame-proxy.bat` 即可啟動代理程式。
+
+## 編譯步驟 (手動)
 
 ## 使用方法
 

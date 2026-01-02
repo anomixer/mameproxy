@@ -17,7 +17,16 @@ MameProxy is a Windows virtual file system (using WinFsp) designed for MAME ROM 
     *   Download: [WinFsp Official Website](https://winfsp.dev/)
 3.  **Visual Studio 2022**: Required to build the project (with C++ Desktop Development workload).
 
-## Build Instructions
+## Quick Setup (Recommended)
+
+To quickly configure and build the project, run the included configuration script:
+
+1.  Run `config.bat`.
+2.  Follow the prompts to set your cache directory and drive letter.
+3.  The script will automatically build the project if needed and create a `mame-proxy.bat` file.
+4.  Run `mame-proxy.bat` to start the proxy.
+
+## Build Instructions (Manual)
 
 This project uses CMake for building:
 

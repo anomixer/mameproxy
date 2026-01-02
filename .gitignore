@@ -21,6 +21,8 @@ CMakeSettings.json
 
 # MameProxy specific
 MameCache/
+mamefs.ini
+mame-proxy.bat
 proxy_log.txt
 proxy_stdout.txt
 proxy_stderr.txt
