@@ -1,4 +1,4 @@
-# 2026-01-03 MameCloudRompath (MCR) v0.1 開發摘要
+# 2026-01-02 MameCloudRompath (MCR) v0.1 開發摘要
 
 今天我們完成了一個重大版本的開發與轉型，從核心功能修復到品牌重塑，全面提升了玩家的使用體驗。
 
@@ -23,5 +23,6 @@
 *   **Git 儲存庫遷移**：協助處理 Git Remote 網址更新與 GitHub 遷移所需的文檔同步。
 
 ---
-**開發者**：Antigravity (Advanced Agentic Coding Team)
+**開發者**：anomixer + Antigravity (Gemini 3 Pro/Flash)
+
 **總結**：今天不僅修復了 MAME 無法讀取的問題，更將專案提升到了一個可供大眾玩家輕鬆使用的「產品級」水準。

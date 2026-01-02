@@ -1,4 +1,4 @@
-# MameCloudRompath (MCR) v0.1
+# MameCloudRompath (MCR)
 
 [繁體中文版](./README-TW.md)
 
@@ -131,5 +131,6 @@ MCR is currently in its **early stages (v0.1)** and likely contains bugs. It is 
 Help us make MCR the ultimate ROM management tool for everyone.
 
 ---
-Developer: Antigravity (Advanced Agentic Coding Team)
-Repository: [GitHub - anomixer/mamecloudrom](https://github.com/anomixer/mamecloudrom)
+Developer: anomixer + Antigravity (Gemini 3 Pro/Flash)
+
+Repository: [GitHub - anomixer/MameCloudRom](https://github.com/anomixer/MameCloudRom)

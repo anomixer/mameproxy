@@ -1,4 +1,4 @@
-# MameCloudRompath (MCR) v0.1
+# MameCloudRompath (MCR)
 
 [English Version](./README.md)
 
@@ -132,5 +132,6 @@ MCR 目前處於 **早期開發階段 (v0.1)**，極可能存在未發現的 Bug
 讓我們一起把 MCR 打造得更好！
 
 ---
-開發者：Antigravity (Advanced Agentic Coding Team)
-專案地址：[GitHub - anomixer/mamecloudrom](https://github.com/anomixer/mamecloudrom)
+開發者：anomixer + Antigravity (Gemini 3 Pro/Flash)
+
+專案地址：[GitHub - anomixer/MameCloudRom](https://github.com/anomixer/MameCloudRom)
